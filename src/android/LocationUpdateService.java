@@ -180,7 +180,7 @@ public class LocationUpdateService extends Service implements LocationListener {
             isDebugging = Boolean.parseBoolean(intent.getStringExtra("isDebugging"));
             notificationTitle = intent.getStringExtra("notificationTitle");
             notificationText = intent.getStringExtra("notificationText");
-
+            stopOnTerminate = Boolean.parseBoolean(intent.getStringExtra("stopOnTerminate"));
             // Build a Notification required for running service in foreground.
             Intent main = new Intent(this, BackgroundGpsPlugin.class);
             main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -209,7 +209,7 @@ public class LocationUpdateService extends Service implements LocationListener {
         Log.i(TAG, "- locationTimeout: "    + locationTimeout);
         Log.i(TAG, "- isDebugging: "        + isDebugging);
         Log.i(TAG, "- notificationTitle: "  + notificationTitle);
-        Log.i(TAG, "- notificationText: "   + notificationText);
+        Log.i(TAG, "- stopOnTerminate: "   + stopOnTerminate);
 
         this.setPace(false);
 
@@ -754,7 +754,7 @@ public class LocationUpdateService extends Service implements LocationListener {
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-        this.stopSelf();
+        //this.stopSelf();
         super.onTaskRemoved(rootIntent);
     }
 
